@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --gray: #333;
+    --blue: rgb(45, 59, 255);
+}
+
+body{
+    font-family: Montserrat;
+}
+#canvas{
+    display: block;
+    transition: 1s;
+}
+
+.learnHotKeysWindow{
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.555);
+    position: fixed;
+    flex-direction: column;
+    border-radius: 15px 15px 15px 0px;
+    display: none;
+}
+.row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    margin: 5px;
+    justify-content: space-between;
+}
+.row div{
+    padding: 2px;
+    background-color: var(--blue);
+    font-weight: 700;
+    border-radius: 10px;
+    color: black;
+}
+
+.controlContainer{
+    width: 200px;
+    height: 100%;
+    background-color: var(--gray);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    left: -200px;
+    top: 0px;
+    transition: 1s;
+}
+.logo{
+    position: fixed;
+    top: 10px;
+    color: white;
+    font-weight: 800;
+    content: 'canvas-paint';
+}
+
+
+#save{
+    width: 150px;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    position: relative;
+    bottom: 10px;
+}
+.learnKey{
+    width: 150px;
+    height: 35px;
+    background-color: transparent;
+    position: relative;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.learnKey div{
+    padding: 10px;
+    border: none; 
+    border-radius: 10px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue);
+    font-weight: 600;
+}
+.learnKey i{
+    font-size: 20px;
+}
