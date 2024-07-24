@@ -97,3 +97,92 @@ body{
 .learnKey i{
     font-size: 20px;
 }
+
+.mainCtrl{
+    width: 90%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.466);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 15px;
+    bottom: 30px;
+    position: relative;
+}
+.standart{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.colorBox{
+    width: 120px;
+    height: 60px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.colorBox input{
+    width: 100%;
+    height: 60px;;
+    display: flex;
+    cursor: pointer;
+    opacity: 0;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+
+
+.changeColor{
+    width: 100px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.452);
+    position: fixed;
+    border-radius: 15px 15px 15px 0px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.changeColor div{
+    width: 40px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.452);
+    border-radius: 5px;
+    margin: 5px;
+}
+.nameEnd{
+    width: 25%;
+    height: 50%;
+    background-color: #333;
+    display: none;
+    border: 2px solid black;
+    position: fixed;
+    top: 25%;
+    left: 37.5%;
+    justify-content: center;
+    align-items: end;
+    border-radius: 10px;
+}
+.nameEnd div{
+    margin-bottom: 2%;
+    display: flex;
+    width: 100%;
+    height: 6%;
+    justify-content: center;
+}
+.nameEnd input{
+    width: 60%;
+    height: 100%;
+}
+.nameEnd button, .nameEnd select{
+    width: 15%;
+    height: 100%;
+}
+
+

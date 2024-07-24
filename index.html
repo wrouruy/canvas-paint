@@ -16,6 +16,13 @@
 
     <div class="controlContainer">
         <div class="logo">canvas-paint</div>
+
+        <div class="mainCtrl">
+            <div class="standart" style="margin-bottom: 50px;"><label for="colorCustom" style="width: 60%;"><div style="display: flex; justify-content: space-between;">Color: <p id="colorValue">#000000</p></div></label>
+            <div class="colorBox"><input type="color" id="colorCustom"></div></div>
+            <div class="standart"><label for="thicknessCustom" style="width: 60%;"><div style="display: flex; justify-content: space-between;">thickness: <p id="textThickness">10</p></div></label><input type="range" min="1" max="50" id="thicknessCustom"></div>
+        </div>
+
         <div class="learnKey"><div>Hot Keys</div><div><i class="fa-solid fa-circle-info"></i></div></div>
         <button id="save">save picture</button>
     </div>
@@ -24,6 +31,22 @@
     <div class="learnHotKeysWindow">
         <div class="row">   <div>ctrl + s</div> save    </div>
         <div class="row">   <div>ctrl + shift + c</div> clear    </div>
+        <div class="row">   <div>ctrl + q</div> change color</div>
+    </div>
+
+    <div class="changeColor">
+        <div id="firstColor"></div>
+        <div id="secondColor"></div>
+    </div>
+
+    <div class="nameEnd">
+        <div><input type="text" id="nameFile">
+        <select id="fileType">
+            <option value=".png">PNG</option>
+            <option value=".jpg">JPG</option>
+            <option value=".gif">GIF</option>
+        </select>
+        <button type="button" id="comfirnNameFile">comfirn</button></div>
     </div>
 
     <script src="./main.js"></script>

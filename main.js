@@ -27,27 +27,28 @@ canvas.onmouseup = function(){
     isMouseDown = false
     ctx.beginPath()
 }
-ctx.lineWidth = 10
+
+
+let thickness = 10
+let mainColor = '#000000'
+let secondColor = '#000000'
 canvas.onmousemove = function(e){
     if( isMouseDown ){
+        ctx.lineWidth = thickness * 2
         ctx.lineTo(e.clientX, e.clientY)
+        ctx.strokeStyle = mainColor
         ctx.stroke()
 
         ctx.beginPath()
-        ctx.arc(e.clientX, e.clientY, 5, 0, Math.PI * 2)
+        ctx.arc(e.clientX, e.clientY, thickness, 0, Math.PI * 2)
+        ctx.fillStyle = mainColor 
         ctx.fill()
 
         ctx.beginPath()
         ctx.moveTo(e.clientX, e.clientY)
     }
 }
-function clear(){
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    ctx.beginPath()
-    ctx.fillStyle = 'black'
-}
 document.onkeydown = function(e){
     // console.log(e.keyCode)
         if (e.ctrlKey && e.keyCode === 83) {
@@ -57,6 +58,19 @@ document.onkeydown = function(e){
         else if (e.ctrlKey && e.shiftKey &&e.keyCode === 67) {
             e.preventDefault(); 
             clear();
+        }
+        else if (e.ctrlKey && e.keyCode === 81) {
+            e.preventDefault(); 
+            [mainColor, secondColor] = [secondColor, mainColor]
+        }
+        else if (e.ctrlKey && e.shiftKey && e.keyCode === 70) {
+            e.preventDefault();
+            if($('.changeColor').css('display') == 'flex'){
+                $('.changeColor').css('display', 'none')
+            } else{
+                $('.changeColor').css('display', 'flex')
+            }
+           
         }
         
 }
@@ -81,24 +95,63 @@ document.onmousemove = function(e){
         $('.controlContainer').css('left', '-200px')
     })
     
+    $('.changeColor').css('top', e.clientY - 60)
+    $('.changeColor').css('left', e.clientX + 10)
+
+    $('#firstColor').css('backgroundColor', mainColor)
+    $('#secondColor').css('backgroundColor', secondColor)
 }
-
-
-
-
 $('#save').click( function() {
     save()
 });
 
+$(document).ready(function() {
+    thickness = 10; 
+
+    $('#thicknessCustom').on('input', function() {
+        thickness = $(this).val();
+        $('#textThickness').text(thickness);
+    });
+
+
+    $('#thicknessCustom').val(thickness);
+    $('#textThickness').text(thickness);
+
+
+    $('#colorCustom').on('input', function() {
+        let color = $(this).val();
+        $('#colorValue').text(color);
+        mainColor = color;
+        $('.colorBox').css('backgroundColor', mainColor);
+    });
+
+    $('#colorCustom').val(mainColor);    
+    $('#colorValue').text(mainColor);
+
+});
 
 
 
+function clear(){
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+    ctx.beginPath()
+    ctx.fillStyle = 'black'
+}
+function save() {
+    $('.nameEnd').css('display', 'flex');
+    let nameFileLet;
 
-
-function save(){
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
-    link.download = 'my_drawing.png';
-    link.click();
+    $('#comfirnNameFile').off('click').on('click', function() {
+        nameFileLet = $('#nameFile').val() + $('#fileType').val();
+    
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png'); 
+        link.download = nameFileLet;
+        link.click();
+        
+        $('#nameFile').val('');
+        $('.nameEnd').css('display', 'none');
+    });
 }
