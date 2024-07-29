@@ -5,22 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>canvas-paint</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="canvas"></canvas>
 
     <div class="controlContainer">
         <div class="logo">canvas-paint</div>
+        <div class="mainCtrl" style="background-color: transparent; margin-bottom: 15px;">
+            <label for="options" style="font-size: 14px;">Select the drawing type:</label>
+            <select id="options" name="options" style="width: 90%;">
+                <option value="classic">classic</option>
+                <option value="pixel-art">pixel-art</option>
+                
+            </select>
+        </div>
+        <div class="mainCtrl" style="gap: 55px;">
+            <div class="typeDraw">
+                <button type="button" id="toPen"><i class="fa-solid fa-pen"></i></button>
+                <button type="button" id="toFill"><i class="fa-solid fa-fill-drip"></i></button>
+                <button type="button" id="toText"><i class="fa-solid fa-a"></i></button>
 
-        <div class="mainCtrl">
+                <button type="button" id="toEraser"><i class="fa-solid fa-eraser"></i></button>
+                <button type="button" id="toPipette"><i class="fa-solid fa-eye-dropper"></i></button>
+                <button type="button" id="toZoom"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+            </div>
             <div class="standart" style="margin-bottom: 50px;"><label for="colorCustom" style="width: 60%;"><div style="display: flex; justify-content: space-between;">Color: <p id="colorValue">#000000</p></div></label>
             <div class="colorBox"><input type="color" id="colorCustom"></div></div>
-            <div class="standart"><label for="thicknessCustom" style="width: 60%;"><div style="display: flex; justify-content: space-between;">thickness: <p id="textThickness">10</p></div></label><input type="range" min="1" max="50" id="thicknessCustom"></div>
+            <div class="standart" style="position: relative; bottom: 30px;"><label for="thicknessCustom" style="width: 60%;"><div style="display: flex; justify-content: space-between;">thickness: <p id="textThickness">10</p></div></label><input type="range" min="1" max="50" id="thicknessCustom"></div>
         </div>
 
         <div class="learnKey"><div>Hot Keys</div><div><i class="fa-solid fa-circle-info"></i></div></div>
@@ -31,7 +51,10 @@
     <div class="learnHotKeysWindow">
         <div class="row">   <div>ctrl + s</div> save    </div>
         <div class="row">   <div>ctrl + shift + c</div> clear    </div>
+        <div class="row">   <div>space</div> play animation</div>
         <div class="row">   <div>ctrl + q</div> change color</div>
+        <div class="row">   <div>ctrl + shift + f</div> close color window</div>
+        <div class="row">   <div style="background-color: rgb(223, 89, 89);">ctrl + g</div> close this window</div>
     </div>
 
     <div class="changeColor">

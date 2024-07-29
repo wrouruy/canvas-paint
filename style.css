@@ -15,14 +15,17 @@ body{
 #canvas{
     display: block;
     transition: 1s;
+    /* background-image: url(./background.png);
+    background-position: center;
+    background-repeat: repeat; */
 }
 
 .learnHotKeysWindow{
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.555);
+    background-color: rgba(0, 0, 0, 0.452);
     position: fixed;
     flex-direction: column;
-    border-radius: 15px 15px 15px 0px;
+    border-radius: 15px 15px 0px 15px;
     display: none;
 }
 .row{
@@ -56,11 +59,12 @@ body{
     transition: 1s;
 }
 .logo{
-    position: fixed;
-    top: 10px;
+    margin-top: 10px;
     color: white;
     font-weight: 800;
     content: 'canvas-paint';
+    font-family: Montserrat;
+    font-size: 25px;
 }
 
 
@@ -106,6 +110,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: end;
+    align-items: center;
     border-radius: 15px;
     bottom: 30px;
     position: relative;
@@ -117,7 +122,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 25px;
 }
 .colorBox{
     width: 120px;
@@ -125,6 +129,7 @@ body{
     display: flex;
     cursor: pointer;
     border-radius: 10px;
+    background-color: black;
 }
 .colorBox input{
     width: 100%;
@@ -186,3 +191,17 @@ body{
 }
 
 
+.typeDraw{
+    width: 70%;
+    height: 50px;
+    flex-wrap: wrap;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.typeDraw button{
+    width: 40px;
+    height: 30px;
+
+}
