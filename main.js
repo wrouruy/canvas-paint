@@ -2,33 +2,16 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var coords = []
 
-let left = document.querySelector('.left')
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 var isMouseDown = false
-let learnKeyLet = false
 
 let typeDraw = {
     pen: true,
-    fill: false,
-    text: false,
-    eraser: false,
-    pipette: false,
-    zoom: false
+    eraser: false
 }
-// var gradient = ctx.createLinearGradient(0, 0, 500, 0);
 
-// gradient.addColorStop('0', 'blue')
-// gradient.addColorStop('.50', 'cornflowerblue')
-// gradient.addColorStop('1', 'skyblue')
-
-// ctx.fillStyle = gradient;
-
-// ctx.font = '50px fantasy'
-// ctx.textAlign = 'center'
-// ctx.fillText('Hello World', canvas.width / 2, canvas.height / 2)
-  
 // code
 canvas.onmousedown = function(){
     isMouseDown = true
@@ -46,11 +29,10 @@ function checkDraw(draw){
     console.log(typeDraw)
 }
 $('#toPen').click(function(){checkDraw('pen')})
-$('#toFill').click(function(){checkDraw('fill')})
-$('#toText').click(function(){checkDraw('text')})
+
 $('#toEraser').click(function(){checkDraw('eraser')})
-$('#toPipette').click(function(){checkDraw('pipette')})
-$('#toZoom').click(function(){checkDraw('zoom')})
+
+
 function clearArc(ctx, x, y, radius, startAngle, endAngle) {
     ctx.save();
     ctx.globalCompositeOperation = 'destination-out';
@@ -62,34 +44,31 @@ function clearArc(ctx, x, y, radius, startAngle, endAngle) {
 
 let thickness = 10
 let mainColor = '#000000'
-let secondColor = '#000000'
+
 canvas.onmousemove = function(e){
     var selectElement = document.getElementById('options');
 
     var selectedValue = selectElement.value;
-    if(learnKeyLet == true){
-        $('.learnHotKeysWindow').css('display', 'flex')
-        $('.learnHotKeysWindow').css('left', (e.clientX - 310))
-        $('.learnHotKeysWindow').css('bottom', (e.clientY - 955) * -1)
-    }
     if( isMouseDown ){
         if(typeDraw.pen == true){
             if(selectedValue == 'pixel-art'){
                 $('.logo').css('font-family', '"Pixelify Sans", sans-serif')
-                ctx.fillRect((Math.round(e.clientX / thickness) * thickness) - (thickness / 2), (Math.round(e.clientY / thickness) * thickness) - (thickness / 2), thickness, thickness)
-                ctx.fillStyle = mainColor
+                ctx.fillRect(Math.floor(Math.round(e.clientX / thickness) * thickness) - (thickness / 2), (Math.round(e.clientY / thickness) * thickness) - (thickness / 2), thickness, thickness)
+                
+                $('#customCursor').css('borderRadius', 0)
             } else if(selectedValue == 'classic') {
                 $('.logo').css('font-family', 'Montserrat')
+                $('#customCursor').css('borderRadius', '50%')
                 coords.push([e.clientX, e.clientY])
         
                 ctx.lineWidth = thickness * 2
                 ctx.lineTo(e.clientX, e.clientY)
-                ctx.strokeStyle = mainColor
+                
                 ctx.stroke()
         
                 ctx.beginPath()
                 ctx.arc(e.clientX, e.clientY, thickness, 0, Math.PI * 2)
-                ctx.fillStyle = mainColor 
+
                 ctx.fill()
         
                 ctx.beginPath()
@@ -97,14 +76,22 @@ canvas.onmousemove = function(e){
             }
         }
         else if(typeDraw.eraser == true){
+
             if(selectedValue == 'pixel-art'){
                 $('.logo').css('font-family', '"Pixelify Sans", sans-serif')
                 ctx.clearRect((Math.round(e.clientX / thickness) * thickness) - (thickness / 2), (Math.round(e.clientY / thickness) * thickness) - (thickness / 2), thickness, thickness)
             } else if(selectedValue == 'classic') {
+  
                 $('.logo').css('font-family', 'Montserrat')
                 coords.push([e.clientX, e.clientY])
         
-                clearArc(ctx, 100, 100, 25, 0, 2 * Math.PI);
+                if(typeDraw.eraser == true){
+                    ctx.fillStyle = 'white'
+                    ctx.strokeStyle = 'white'
+                } else {
+                    ctx.fillStyle = mainColor 
+                    ctx.strokeStyle = mainColor 
+                }
                 ctx.fill()
 
             }
@@ -113,35 +100,30 @@ canvas.onmousemove = function(e){
 
 }
 
-document.onkeydown = function(e){
-    // console.log(e.keyCode)
-        if (e.ctrlKey && e.keyCode === 83) { e.preventDefault(); save(); } // save draw
-        if (e.ctrlKey && e.shiftKey &&e.keyCode === 67) { e.preventDefault(); clear(); }  // clear draw 
-        if (e.ctrlKey && e.keyCode === 81) { e.preventDefault(); [mainColor, secondColor] = [secondColor, mainColor] } // fast change color
-        if (e.ctrlKey && e.shiftKey && e.keyCode === 70) { e.preventDefault(); if($('.changeColor').css('display') == 'flex'){$('.changeColor').css('display', 'none')} else{$('.changeColor').css('display', 'flex')}} // close window color
-        // if (e.keyCode == 32) { e.preventDefault(); play()} // play animation
-        if (e.ctrlKey && e.keyCode === 71) { e.preventDefault(); $('.learnHotKeysWindow').css('display', 'none');  learnKeyLet = false} // close learn hot keys window
+document.onkeydown = function(e){   
+    if (e.ctrlKey && e.keyCode === 83) { e.preventDefault(); save(); } // save draw
+    if (e.ctrlKey && e.shiftKey &&e.keyCode === 67) { e.preventDefault(); clear(); }  // clear draw 
+        
+    if (e.keyCode == 32) { e.preventDefault(); play()} // play animation
+    if (e.ctrlKey && e.keyCode === 71) { e.preventDefault(); $('.learnHotKeysWindow').css('display', 'none');  learnKeyLet = false} // close learn hot keys window
+    if(e.keyCode === 13){
+        ctx.fillStyle = 'white'
+        ctx.strokeStyle = 'white'
+    }
 }
 
 
 document.onmousemove = function(e){
-    $('.learnKey').mouseenter(function(){
-        learnKeyLet = true
-    })
-    // $('.learnKey').mouseleave(function(){
-    // $('.learnHotKeysWindow').css('display', 'none')
-    // })
-
     if(isMouseDown == false){
         if(e.clientX < 10){
             $('.controlContainer').css('left', '0px')
+           
         } else if(e.clientX > 200){
             $('.controlContainer').css('left', '-200px')
+        
         }
     }
     
-    $('.changeColor').css('bottom', (e.clientY - 955) * -1)
-    $('.changeColor').css('left', e.clientX + 10)
 
     $('#firstColor').css('backgroundColor', mainColor)
     $('#secondColor').css('backgroundColor', secondColor)
@@ -200,35 +182,56 @@ function save() {
         $('.nameEnd').css('display', 'none');
     });
 }
-// function play(){
-//     clear()
-//     var timer = setInterval(function(){
-//         if( !coords.length ){
-//             clearInterval(timer)
-//             ctx.beginPath()
-//             return
-//         }
-//         var 
-//             crd = coords.shift(),
-//             e = {
-//                 clientX: crd["0"],
-//                 clientY: crd["1"]
-//             }
-//             ctx.lineWidth = thickness * 2
-//             ctx.lineTo(e.clientX, e.clientY)
-//             ctx.stroke()
+function play(){
+    clear()
+    var timer = setInterval(function(){
+        if( !coords.length ){
+            clearInterval(timer)
+            ctx.beginPath()
+            return
+        }
+        var 
+            crd = coords.shift(),
+            e = {
+                clientX: crd["0"],
+                clientY: crd["1"]
+            }
+            ctx.lineWidth = thickness * 2
+            ctx.lineTo(e.clientX, e.clientY)
+            ctx.stroke()
 
-//             ctx.beginPath()
-//             ctx.arc(e.clientX, e.clientY, thickness, 0, Math.PI * 2)
+            ctx.beginPath()
+            ctx.arc(e.clientX, e.clientY, thickness, 0, Math.PI * 2)
 
-//             ctx.fillStyle = coords.push()
-//             ctx.strokeStyle = coords.push()
+            ctx.fillStyle = coords.push()
+            ctx.strokeStyle = coords.push()
 
-//             ctx.fill()
+            ctx.fill()
 
-//             ctx.beginPath()
-//             ctx.moveTo(e.clientX, e.clientY)
+            ctx.beginPath()
+            ctx.moveTo(e.clientX, e.clientY)
             
-//     }, 30)
+    }, 30)
 
-// }
+}
+
+
+
+document.addEventListener('mousemove', (e) => {
+    $('#customCursor').css('padding', `${thickness}px`);
+
+    $('#customCursor').css('left', `${e.clientX}px`);
+    $('#customCursor').css('top', `${e.clientY}px`);
+});
+canvas.onmouseenter = function(){ $('#customCursor').css('display', 'flex') }
+canvas.onmouseleave = function(){ $('#customCursor').css('display', 'none'); ctx.beginPath(); isMouseDown = false}
+
+
+
+document.querySelectorAll('.trigger').forEach(button => {
+    button.addEventListener('click', () => {
+      const parent = button.parentElement;
+      parent.classList.toggle('active');
+    });
+  });
+  

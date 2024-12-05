@@ -16,9 +16,23 @@ body{
     display: block;
     transition: 1s;
     /* background-image: url(./background.png);
+    background-size: 83px;
     background-position: center;
     background-repeat: repeat; */
+    cursor: none;
 }
+#customCursor {
+    position: fixed;
+    background-color: transparent;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 50%;
+
+    /* background-image: url(cursor.png);
+    background-position: center;
+    background-size: cover; */
+  }
 
 .learnHotKeysWindow{
     padding: 10px;
@@ -33,7 +47,7 @@ body{
     display: flex;
     align-items: center;
     gap: 5px;
-    color: white;
+    color: black;
     margin: 5px;
     justify-content: space-between;
 }
@@ -77,6 +91,11 @@ body{
     color: white;
     position: relative;
     bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#save:hover{
+    transform: scale(1.02);
 }
 .learnKey{
     width: 150px;
@@ -199,9 +218,58 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;    
 }
 .typeDraw button{
     width: 40px;
     height: 30px;
 
+}
+
+
+.comment-box {
+    position: relative;
+    margin: 20px;
+    text-align: center;
+}
+  
+.comment {
+    position: absolute;
+    top: -35px;
+    left: 100px;
+    transform: translateX(-50%);
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: black;
+}
+  
+.comment-box:hover .comment, .comment-box.active .comment {
+    opacity: 1;
+    visibility: visible;
+    top: -110px;
+    color: black;
+}
+  
+.trigger {
+    background: #007bff;
+    color: black;
+    font-weight: 500;
+    border: none;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  
+.trigger:hover {
+    background: #0056b3;
 }
