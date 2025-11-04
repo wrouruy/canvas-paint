@@ -126,7 +126,6 @@ document.onmousemove = function(e){
     
 
     $('#firstColor').css('backgroundColor', mainColor)
-    $('#secondColor').css('backgroundColor', secondColor)
 }
 $('#save').click( function() {
     save()
@@ -234,4 +233,5 @@ document.querySelectorAll('.trigger').forEach(button => {
       parent.classList.toggle('active');
     });
   });
+
   
